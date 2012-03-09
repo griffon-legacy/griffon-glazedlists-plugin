@@ -65,34 +65,34 @@ The following nodes will become available on a View script upon installing this 
 | defaultTableFormat         | columnNames        | List                 | yes        | no         |                                  |
 |                            | columns            | List<Map<String, ?>> | yes        | no         |                                  |
 |                            | columns.name       | String               | yes        | no         | column's name                    |
-|                            | columns.title      | String               | no         | no         | column's title                   |
-|                            | columns.read       | Closure              | no         | no         | element property reader          |
-|                            | read               | Closure              | no         | no         | default element property reader  |
-| defaultAdvancedTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                  |
+|                            | columns.title      | String               | no         | no         | column's title                   |
+|                            | columns.read       | Closure              | no         | no         | element property reader          |
+|                            | read               | Closure              | no         | no         | default element property reader  |
+| defaultAdvancedTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                  |
 |                            | columns.name       | String               | yes        | no         | column's name                    |
-|                            | columns.title      | String               | no         | no         | column's title                   |
-|                            | columns.class      | Class                | no         | no         | column's class                   |
-|                            | columns.comparator | Comparator           | no         | no         | column's comparator              |
-|                            | columns.read       | Closure              | no         | no         | element property reader          |
-|                            | read               | Closure              | no         | no         | default element property reader  |
-| defaultWritableTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                  |
+|                            | columns.title      | String               | no         | no         | column's title                   |
+|                            | columns.class      | Class                | no         | no         | column's class                   |
+|                            | columns.comparator | Comparator           | no         | no         | column's comparator              |
+|                            | columns.read       | Closure              | no         | no         | element property reader          |
+|                            | read               | Closure              | no         | no         | default element property reader  |
+| defaultWritableTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                  |
 |                            | columns.name       | String               | yes        | no         | column's name                    |
-|                            | columns.title      | String               | no         | no         | column's title                   |
-|                            | columns.class      | Class                | no         | no         | column's class                   |
-|                            | columns.comparator | Comparator           | no         | no         | column's comparator              |
-|                            | columns.read       | Closure              | no         | no         | element property reader          |
-|                            | columns.write      | Closure              | no         | no         | element property writer          |
-|                            | columns.editable   | Closure              | no         | no         | is this column editable?         |
-|                            | read               | Closure              | no         | no         | default element property reader  |
-|                            | write              | Closure              | no         | no         | default element property writer  |
-|                            | editable           | Closure              | no         | no         | default editable state evaluator |
-| eventComboBoxModel         | source             | EventList            | yes        | no         |                                  |
-| eventListModel             | source             | EventList            | yes        | no         |                                  |
-| eventTableModel            | source             | EventList            | yes        | no         |                                  |
-|                            | format             | TableFormat          | yes        | no         |                                  |
-| eventTreeModel             | source             | TreeList             | yes        | no         |                                  |
-| eventJXTableModel          | source             | EventList            | yes        | no         |                                  |
-|                            | format             | TableFormat          | yes        | no         |                                  |
+|                            | columns.title      | String               | no         | no         | column's title                   |
+|                            | columns.class      | Class                | no         | no         | column's class                   |
+|                            | columns.comparator | Comparator           | no         | no         | column's comparator              |
+|                            | columns.read       | Closure              | no         | no         | element property reader          |
+|                            | columns.write      | Closure              | no         | no         | element property writer          |
+|                            | columns.editable   | Closure              | no         | no         | is this column editable?         |
+|                            | read               | Closure              | no         | no         | default element property reader  |
+|                            | write              | Closure              | no         | no         | default element property writer  |
+|                            | editable           | Closure              | no         | no         | default editable state evaluator |
+| eventComboBoxModel         | source             | EventList            | yes        | no         |                                  |
+| eventListModel             | source             | EventList            | yes        | no         |                                  |
+| eventTableModel            | source             | EventList            | yes        | no         |                                  |
+|                            | format             | TableFormat          | yes        | no         |                                  |
+| eventTreeModel             | source             | TreeList             | yes        | no         |                                  |
+| eventJXTableModel          | source             | EventList            | yes        | no         |                                  |
+|                            | format             | TableFormat          | yes        | no         |                                  |
 
 The following methods become available as well
 
@@ -101,15 +101,15 @@ The following methods become available as well
 | Argument | Type      | Default                                       |
 | -------- | --------- | --------------------------------------------- |
 | target   | JTable    | builder's `current` node                      |
-| source   | EventList |                                               |
-| strategy | Object    | AbstractTableComparatorChooser.SINGLE\_COLUMN |
+| source   | EventList |                                               |
+| strategy | Object    | AbstractTableComparatorChooser.SINGLE_COLUMN  |
     
  *  **installTTreeTableSupport(Map args)** - install a TableComparatorChooser on a target JTable
     
 | Argument | Type     | Default                  |
 | -------- | -------- | ------------------------ |
 | target   | JTable   | builder's `current` node |
-| source   | TreeList |                          |
+| source   | TreeList |                          |
 | index    | int      | 1                        |
 
  *  **installComboBoxAutoCompleteSupport(Map args)** - install a TableComparatorChooser on a target JTable
@@ -117,24 +117,24 @@ The following methods become available as well
 | Argument       | Type           | Default                  |
 | -------------- | -------------- | ------------------------ |
 | target         | JComboBox      | builder's `current` node |
-| items          | EventList      |                          |
-| textFilterator | TextFilterator |                          |
-| format         | Format         |                          |
+| items          | EventList      |                          |
+| textFilterator | TextFilterator |                          |
+| format         | Format         |                          |
     
  *  **installEventSelectionModel(Map args)** - install an EventSelectionModel on a target JTable
     
 | Argument      | Type      | Default                              |
 | ------------- | --------- | ------------------------------------ |
 | target        | JComboBox | builder's `current` node             |
-| source        | EventList |                                      |
-| selectionMode | int       | ListSelectionModel.SINGLE\_SELECTION |
+| source        | EventList |                                      |
+| selectionMode | int       | ListSelectionModel.SINGLE_SELECTION  |
     
- *  **installJXTableSorting(Map args)** \- using a JXTables native sorting system instead of glazedlists
+ *  **installJXTableSorting(Map args)** - using a JXTables native sorting system instead of glazedlists
     
 | Argument | Type       | Default                  |
 | -------- | ---------- | ------------------------ |
 | target   | JComboBox  | builder's `current` node |
-| source   | SortedList |                          |
+| source   | SortedList |                          |
 | multiple | boolean    | false                    |
 
 The following Model and View scripts shows a basic usage.

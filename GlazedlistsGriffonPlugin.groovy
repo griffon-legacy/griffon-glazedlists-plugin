@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
  */
 class GlazedlistsGriffonPlugin {
     // the plugin version
-    String version = '0.9'
+    String version = '1.0.0'
     // the version or versions of Griffon the plugin is designed for
-    String griffonVersion = '0.9.5 > *'
+    String griffonVersion = '1.0.0 > *'
     // the other plugins this plugin depends on
-    Map dependsOn = [swing: '0.9.5']
+    Map dependsOn = [swing: '1.0.0']
     // resources that are included in plugin packaging
     List pluginIncludes = []
     // the plugin license
@@ -97,15 +97,15 @@ The following nodes will become available on a View script upon installing this 
 The following methods become available as well
 
  *  **installTableComparatorChooser(Map args)** - install a TableComparatorChooser on a target JTable
-    
+
 | Argument | Type      | Default                                       |
 | -------- | --------- | --------------------------------------------- |
 | target   | JTable    | builder's `current` node                      |
 | source   | EventList |                                               |
 | strategy | Object    | AbstractTableComparatorChooser.SINGLE_COLUMN  |
-    
+
  *  **installTTreeTableSupport(Map args)** - install a TableComparatorChooser on a target JTable
-    
+
 | Argument | Type     | Default                  |
 | -------- | -------- | ------------------------ |
 | target   | JTable   | builder's `current` node |
@@ -113,24 +113,24 @@ The following methods become available as well
 | index    | int      | 1                        |
 
  *  **installComboBoxAutoCompleteSupport(Map args)** - install a TableComparatorChooser on a target JTable
-    
+
 | Argument       | Type           | Default                  |
 | -------------- | -------------- | ------------------------ |
 | target         | JComboBox      | builder's `current` node |
 | items          | EventList      |                          |
 | textFilterator | TextFilterator |                          |
 | format         | Format         |                          |
-    
+
  *  **installEventSelectionModel(Map args)** - install an EventSelectionModel on a target JTable
-    
+
 | Argument      | Type      | Default                              |
 | ------------- | --------- | ------------------------------------ |
 | target        | JComboBox | builder's `current` node             |
 | source        | EventList |                                      |
 | selectionMode | int       | ListSelectionModel.SINGLE_SELECTION  |
-    
+
  *  **installJXTableSorting(Map args)** - using a JXTables native sorting system instead of glazedlists
-    
+
 | Argument | Type       | Default                  |
 | -------- | ---------- | ------------------------ |
 | target   | JComboBox  | builder's `current` node |
@@ -144,11 +144,11 @@ __SampleModel.groovy__
         import ca.odell.glazedlists.EventList
         import ca.odell.glazedlists.BasicEventList
         import ca.odell.glazedlists.SortedList
- 
+
         class SampleModel {
             EventList persons = new SortedList( new BasicEventList(),
                 {a, b -> a.name <=> b.name} as Comparator)
- 
+
             SampleModel() {
                 persons.addAll([
                     [name: 'Adam',   lastName: 'Savage'],
@@ -164,7 +164,7 @@ __SampleModel.groovy__
 __SampleView.groovy__
 
         import ca.odell.glazedlists.BasicEventList
- 
+
         application(title: 'GlazedLists',
           preferredSize:[300, 300],
           locationByPlatform:true,

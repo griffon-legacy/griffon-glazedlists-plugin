@@ -34,7 +34,7 @@ import ca.odell.glazedlists.swing.EventListJXTableSorting
  * @author Andres Almiray
  */
 class GlazedlistsGriffonAddon {
-    def factories = [
+    Map factories = [
         defaultTableFormat: new DefaultTableFormatFactory(),
         defaultWritableTableFormat: new DefaultWritableTableFormatFactory(),
         defaultAdvancedTableFormat: new DefaultAdvancedTableFormatFactory(),
@@ -46,7 +46,7 @@ class GlazedlistsGriffonAddon {
         eventJXTableModel: new EventJXTableModelFactory()
     ]
 
-    def methods = [
+    Map methods = [
         installTableComparatorChooser: { Map args ->
             def params = [target: current, strategy: AbstractTableComparatorChooser.SINGLE_COLUMN] + args
             if(!(params.target instanceof JTable)) {

@@ -15,6 +15,7 @@
  */
 
 import griffon.glazedlists.factory.*
+import ca.odell.glazedlists.util.concurrent.Lock
 import ca.odell.glazedlists.EventList
 import ca.odell.glazedlists.TreeList
 import ca.odell.glazedlists.TextFilterator
@@ -30,10 +31,31 @@ import ca.odell.glazedlists.swing.EventSelectionModel
 import ca.odell.glazedlists.SortedList
 import ca.odell.glazedlists.swing.EventListJXTableSorting
 
+import griffon.core.GriffonApplication
+
 /**
  * @author Andres Almiray
  */
 class GlazedlistsGriffonAddon {
+    void addonInit(GriffonApplication app) {
+        final withLockHandler = { Lock lock, Closure closure ->
+            lock.lock()
+            try { closure() }
+            finally { lock.unlock() }
+        }
+        Lock.metaClass.withLock = { Closure closure ->
+            withLockHandler(delegate, closure)
+        }
+
+        EventList.metaClass.withReadLock = { Closure closure ->
+            withLockHandler(delegate.readWriteLock.readLock(), closure)
+        }
+
+        EventList.metaClass.withWriteLock = { Closure closure ->
+            withLockHandler(delegate.readWriteLock.writeLock(), closure)
+        }
+    }
+
     Map factories = [
         defaultTableFormat: new DefaultTableFormatFactory(),
         defaultWritableTableFormat: new DefaultWritableTableFormatFactory(),

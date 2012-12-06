@@ -190,6 +190,24 @@ __SampleView.groovy__
         }
     }
 
+### MetaProgramming Additions
+
+The following classes have been enhanced using runtime meta-programming:
+
+ __ca.odell.glazedlists.util.concurrent.Lock__
+
+ * `withLock(Closure)` - this method executes the closure in the context of Lock, by aquiring and releasing
+   the lock around the execution; like this
+
+            lock.lock()
+            try { closure() }
+            finally { lock.unlock() }
+
+ __ca.odell.glazedlists.EventList__
+
+ * `withReadLock(Closure)` - builds on top of `Lock.withLock`, decorating the List's ReadLock.
+ * `withWriteLock(Closure)` - builds on top of `Lock.withLock`, decorating the List's WriteLock.
+
 [1]: http://publicobject.com/glazedlists
 '''
 }

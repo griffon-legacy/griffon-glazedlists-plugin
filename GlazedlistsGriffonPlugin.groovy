@@ -19,7 +19,7 @@
  */
 class GlazedlistsGriffonPlugin {
     // the plugin version
-    String version = '1.0.0'
+    String version = '1.1.0'
     // the version or versions of Griffon the plugin is designed for
     String griffonVersion = '1.0.0 > *'
     // the other plugins this plugin depends on
@@ -141,56 +141,54 @@ The following Model and View scripts shows a basic usage.
 
 __SampleModel.groovy__
 
-        import ca.odell.glazedlists.EventList
-        import ca.odell.glazedlists.BasicEventList
-        import ca.odell.glazedlists.SortedList
+    import ca.odell.glazedlists.EventList
+    import ca.odell.glazedlists.BasicEventList
+    import ca.odell.glazedlists.SortedList
+    class SampleModel {
+        EventList persons = new SortedList( new BasicEventList(),
+            {a, b -> a.name <=> b.name} as Comparator)
 
-        class SampleModel {
-            EventList persons = new SortedList( new BasicEventList(),
-                {a, b -> a.name <=> b.name} as Comparator)
-
-            SampleModel() {
-                persons.addAll([
-                    [name: 'Adam',   lastName: 'Savage'],
-                    [name: 'Jamie',  lastName: 'Hyneman'],
-                    [name: 'Kari',   lastName: 'Byron'],
-                    [name: 'Grant',  lastName: 'Imahara'],
-                    [name: 'Tori',   lastName: 'Belleci'],
-                    [name: 'Buster', lastName: ''],
-                ])
-            }
+        SampleModel() {
+            persons.addAll([
+                [name: 'Adam',   lastName: 'Savage'],
+                [name: 'Jamie',  lastName: 'Hyneman'],
+                [name: 'Kari',   lastName: 'Byron'],
+                [name: 'Grant',  lastName: 'Imahara'],
+                [name: 'Tori',   lastName: 'Belleci'],
+                [name: 'Buster', lastName: ''],
+            ])
         }
+    }
 
 __SampleView.groovy__
 
-        import ca.odell.glazedlists.BasicEventList
-
-        application(title: 'GlazedLists',
-          preferredSize:[300, 300],
-          locationByPlatform:true,
-          iconImage: imageIcon('/griffon-icon-48x48.png').image,
-          iconImages: [imageIcon('/griffon-icon-48x48.png').image,
-                       imageIcon('/griffon-icon-32x32.png').image,
-                       imageIcon('/griffon-icon-16x16.png').image]) {
-            borderLayout()
-            panel(constraints: NORTH) {
-                gridLayout(cols: 1, rows: 2)
-                comboBox {
-                    installComboBoxAutoCompleteSupport(items: new BasicEventList(model.persons*.name))
-                }
-                comboBox {
-                    installComboBoxAutoCompleteSupport(items: new BasicEventList(model.persons*.lastName))
-                }
+    import ca.odell.glazedlists.BasicEventList
+    application(title: 'GlazedLists',
+      preferredSize:[300, 300],
+      locationByPlatform:true,
+      iconImage: imageIcon('/griffon-icon-48x48.png').image,
+      iconImages: [imageIcon('/griffon-icon-48x48.png').image,
+                   imageIcon('/griffon-icon-32x32.png').image,
+                   imageIcon('/griffon-icon-16x16.png').image]) {
+        borderLayout()
+        panel(constraints: NORTH) {
+            gridLayout(cols: 1, rows: 2)
+            comboBox {
+                installComboBoxAutoCompleteSupport(items: new BasicEventList(model.persons*.name))
             }
-            scrollPane(constraints: CENTER) {
-                table(id: 'personsTable') {
-                    tableFormat = defaultTableFormat(columnNames: ['Name', 'LastName'])
-                    // tableFormat = defaultAdvancedTableFormat(columns: [[name:'Name'], [name: 'LastName']])
-                    eventTableModel(source: model.persons, format: tableFormat)
-                    installTableComparatorChooser(source: model.persons)
-                }
+            comboBox {
+                installComboBoxAutoCompleteSupport(items: new BasicEventList(model.persons*.lastName))
             }
         }
+        scrollPane(constraints: CENTER) {
+            table(id: 'personsTable') {
+                tableFormat = defaultTableFormat(columnNames: ['Name', 'LastName'])
+                // tableFormat = defaultAdvancedTableFormat(columns: [[name:'Name'], [name: 'LastName']])
+                eventTableModel(source: model.persons, format: tableFormat)
+                installTableComparatorChooser(source: model.persons)
+            }
+        }
+    }
 
 [1]: http://publicobject.com/glazedlists
 '''

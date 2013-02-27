@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,20 +23,20 @@ import griffon.glazedlists.gui.DefaultTableFormat
  */
 class DefaultTableFormatFactory extends AbstractFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
-            throws InstantiationException, IllegalAccessException {
-        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, DefaultTableFormat)) {
+    throws InstantiationException, IllegalAccessException {
+        if (FactoryBuilderSupport.checkValueIsTypeNotString(value, name, DefaultTableFormat)) {
             return value
         }
 
-        if(attributes.containsKey('columns')) {
+        if (attributes.containsKey('columns')) {
             def columns = attributes.remove('columns')
-            if(columns instanceof List) {
+            if (columns instanceof List) {
                 return new DefaultTableFormat(columns.name, columns.title, columns.read, attributes.remove('read'))
             }
             throw new IllegalArgumentException("In $name the value of columns: must be a List with the following format [[name: 'firstName, title: 'First Name'], [name: 'lastName', title: 'Last Name']]")
         }
 
-        if(!attributes.containsKey('columnNames')) {
+        if (!attributes.containsKey('columnNames')) {
             throw new IllegalArgumentException("In $name you must define a value for columnNames:, i.e, ['ColumnA', 'ColumnB']")
         }
         List columnNames = attributes.remove('columnNames')

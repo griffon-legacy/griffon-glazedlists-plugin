@@ -7,7 +7,7 @@ griffon.project.dependency.resolution = {
         mavenRepo 'http://repository.sonatype.org/content/groups/public'
     }
     dependencies {
-        compile 'net.java.dev.glazedlists:glazedlists_java15:1.8.0'
+        compile 'net.java.dev.glazedlists:glazedlists_java15:1.9.0'
     }
 }
 

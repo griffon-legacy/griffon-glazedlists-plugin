@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package griffon.glazedlists.factory
 import ca.odell.glazedlists.TreeList
 import ca.odell.glazedlists.swing.EventTreeModel
 import griffon.glazedlists.gui.ClosureEventTreeModel
+
 import javax.swing.JTree
 
 /**
@@ -26,24 +27,24 @@ import javax.swing.JTree
  */
 class EventTreeModelFactory extends AbstractFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
-            throws InstantiationException, IllegalAccessException {
-        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, EventTreeModel)) {
+    throws InstantiationException, IllegalAccessException {
+        if (FactoryBuilderSupport.checkValueIsTypeNotString(value, name, EventTreeModel)) {
             return value
         }
 
-        if(!attributes.containsKey('source')) {
+        if (!attributes.containsKey('source')) {
             throw new IllegalArgumentException("In $name you must define a value for source: of type ${TreeList.class.name}")
         }
         TreeList source = attributes.remove('source')
         new ClosureEventTreeModel(source)
     }
 
-  def void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
-    if(builder.context.containsKey('updateClosure'))
-      node.update = builder.context.updateClosure
-    if(parent instanceof JTree)
-      parent.model = node
-  }
+    def void onNodeCompleted(FactoryBuilderSupport builder, Object parent, Object node) {
+        if (builder.context.containsKey('updateClosure'))
+            node.update = builder.context.updateClosure
+        if (parent instanceof JTree)
+            parent.model = node
+    }
 }
 
 class EventTreeModelUpdateFactory extends AbstractFactory {

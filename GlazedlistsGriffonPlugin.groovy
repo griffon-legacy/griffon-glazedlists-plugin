@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2012 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
  */
 class GlazedlistsGriffonPlugin {
     // the plugin version
-    String version = '1.1.0'
+    String version = '2.0.0'
     // the version or versions of Griffon the plugin is designed for
-    String griffonVersion = '1.0.0 > *'
+    String griffonVersion = '1.2.0 > *'
     // the other plugins this plugin depends on
-    Map dependsOn = [swing: '1.0.0']
+    Map dependsOn = [swing: '1.2.0']
     // resources that are included in plugin packaging
     List pluginIncludes = []
     // the plugin license
@@ -60,39 +60,45 @@ Usage
 
 The following nodes will become available on a View script upon installing this plugin
 
-| *Node*                     | *Property*         | *Type*               | *Required* | *Bindable* | *Notes*                          |
-| -------------------------- | ------------------ | -------------------- | ---------- | ---------- | -------------------------------- |
-| defaultTableFormat         | columnNames        | List                 | yes        | no         |                                  |
-|                            | columns            | List<Map<String, ?>> | yes        | no         |                                  |
-|                            | columns.name       | String               | yes        | no         | column's name                    |
-|                            | columns.title      | String               | no         | no         | column's title                   |
-|                            | columns.read       | Closure              | no         | no         | element property reader          |
-|                            | read               | Closure              | no         | no         | default element property reader  |
-| defaultAdvancedTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                  |
-|                            | columns.name       | String               | yes        | no         | column's name                    |
-|                            | columns.title      | String               | no         | no         | column's title                   |
-|                            | columns.class      | Class                | no         | no         | column's class                   |
-|                            | columns.comparator | Comparator           | no         | no         | column's comparator              |
-|                            | columns.read       | Closure              | no         | no         | element property reader          |
-|                            | read               | Closure              | no         | no         | default element property reader  |
-| defaultWritableTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                  |
-|                            | columns.name       | String               | yes        | no         | column's name                    |
-|                            | columns.title      | String               | no         | no         | column's title                   |
-|                            | columns.class      | Class                | no         | no         | column's class                   |
-|                            | columns.comparator | Comparator           | no         | no         | column's comparator              |
-|                            | columns.read       | Closure              | no         | no         | element property reader          |
-|                            | columns.write      | Closure              | no         | no         | element property writer          |
-|                            | columns.editable   | Closure              | no         | no         | is this column editable?         |
-|                            | read               | Closure              | no         | no         | default element property reader  |
-|                            | write              | Closure              | no         | no         | default element property writer  |
-|                            | editable           | Closure              | no         | no         | default editable state evaluator |
-| eventComboBoxModel         | source             | EventList            | yes        | no         |                                  |
-| eventListModel             | source             | EventList            | yes        | no         |                                  |
-| eventTableModel            | source             | EventList            | yes        | no         |                                  |
-|                            | format             | TableFormat          | yes        | no         |                                  |
-| eventTreeModel             | source             | TreeList             | yes        | no         |                                  |
-| eventJXTableModel          | source             | EventList            | yes        | no         |                                  |
-|                            | format             | TableFormat          | yes        | no         |                                  |
+| *Node*                     | *Property*         | *Type*               | *Required* | *Bindable* | *Notes*                            |
+| -------------------------- | ------------------ | -------------------- | ---------- | ---------- | ---------------------------------- |
+| defaultTableFormat         | columnNames        | List                 | yes        | no         |                                    |
+|                            | columns            | List<Map<String, ?>> | yes        | no         |                                    |
+|                            | columns.name       | String               | yes        | no         | column's name                      |
+|                            | columns.title      | String               | no         | no         | column's title                     |
+|                            | columns.read       | Closure              | no         | no         | element property reader            |
+|                            | read               | Closure              | no         | no         | default element property reader    |
+| defaultAdvancedTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                    |
+|                            | columns.name       | String               | yes        | no         | column's name                      |
+|                            | columns.title      | String               | no         | no         | column's title                     |
+|                            | columns.class      | Class                | no         | no         | column's class                     |
+|                            | columns.comparator | Comparator           | no         | no         | column's comparator                |
+|                            | columns.read       | Closure              | no         | no         | element property reader            |
+|                            | read               | Closure              | no         | no         | default element property reader    |
+| defaultWritableTableFormat | columns            | List<Map<String, ?>> | yes        | no         |                                    |
+|                            | columns.name       | String               | yes        | no         | column's name                      |
+|                            | columns.title      | String               | no         | no         | column's title                     |
+|                            | columns.class      | Class                | no         | no         | column's class                     |
+|                            | columns.comparator | Comparator           | no         | no         | column's comparator                |
+|                            | columns.read       | Closure              | no         | no         | element property reader            |
+|                            | columns.write      | Closure              | no         | no         | element property writer            |
+|                            | columns.editable   | Closure              | no         | no         | is this column editable?           |
+|                            | read               | Closure              | no         | no         | default element property reader    |
+|                            | write              | Closure              | no         | no         | default element property writer    |
+|                            | editable           | Closure              | no         | no         | default editable state evaluator   |
+| eventComboBoxModel         | source             | EventList            | yes        | no         |                                    |
+|                            | wrap               | boolean              | no         | no         | wrap source with Thread safe proxy |
+| eventListModel             | source             | EventList            | yes        | no         |                                    |
+|                            | wrap               | boolean              | no         | no         | wrap source with Thread safe proxy |
+| eventTableModel            | source             | EventList            | yes        | no         |                                    |
+|                            | format             | TableFormat          | yes        | no         |                                    |
+|                            | wrap               | boolean              | no         | no         | wrap source with Thread safe proxy |
+| eventTreeModel             | source             | TreeList             | yes        | no         |                                    |
+| eventJXTableModel          | source             | EventList            | yes        | no         |                                    |
+|                            | format             | TableFormat          | yes        | no         |                                    |
+
+The `wrap:` property in `eventComboBoxModel`, `eventListModel` and `eventTableModel`
+defaults to `true` in order to keep behavior compatibility with previous releases.
 
 The following methods become available as well
 
@@ -163,6 +169,8 @@ __SampleModel.groovy__
 __SampleView.groovy__
 
     import ca.odell.glazedlists.BasicEventList
+    import static ca.odell.glazedlists.swing.GlazedListsSwing.swingThreadProxyList
+    def threadSafeEventList = { list ->  swingThreadProxyList(new BasicEventList(list)) }
     application(title: 'GlazedLists',
       preferredSize:[300, 300],
       locationByPlatform:true,
@@ -174,10 +182,10 @@ __SampleView.groovy__
         panel(constraints: NORTH) {
             gridLayout(cols: 1, rows: 2)
             comboBox {
-                installComboBoxAutoCompleteSupport(items: new BasicEventList(model.persons*.name))
+                installComboBoxAutoCompleteSupport(items: threadSafeEventList(model.persons*.name))
             }
             comboBox {
-                installComboBoxAutoCompleteSupport(items: new BasicEventList(model.persons*.lastName))
+                installComboBoxAutoCompleteSupport(items: threadSafeEventList(model.persons*.lastName))
             }
         }
         scrollPane(constraints: CENTER) {
@@ -208,6 +216,6 @@ The following classes have been enhanced using runtime meta-programming:
  * `withReadLock(Closure)` - builds on top of `Lock.withLock`, decorating the List's ReadLock.
  * `withWriteLock(Closure)` - builds on top of `Lock.withLock`, decorating the List's WriteLock.
 
-[1]: http://publicobject.com/glazedlists
+[1]: http://www.glazedlists.com/
 '''
 }

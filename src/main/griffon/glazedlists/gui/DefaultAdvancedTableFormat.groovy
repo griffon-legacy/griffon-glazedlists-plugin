@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ class DefaultAdvancedTableFormat extends DefaultTableFormat implements AdvancedT
     private final List columnClasses = []
     private final List columnComparators = []
 
-    DefaultAdvancedTableFormat(List<Map<String,?>> columns, Closure getColumnValueStrategy = DefaultTableFormat.GET_COLUMN_VALUE_STRATEGY) {
+    DefaultAdvancedTableFormat(List<Map<String, ?>> columns, Closure getColumnValueStrategy = DefaultTableFormat.GET_COLUMN_VALUE_STRATEGY) {
         super(columns.name, columns.title, columns.read, getColumnValueStrategy ?: DefaultTableFormat.GET_COLUMN_VALUE_STRATEGY)
         columns.collect(columnClasses) { columndef ->
             columndef.class ?: DEFAULT_CLASS

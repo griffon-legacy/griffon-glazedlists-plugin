@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,22 +17,27 @@
 package griffon.glazedlists.factory
 
 import ca.odell.glazedlists.EventList
-import ca.odell.glazedlists.swing.EventListModel
+import ca.odell.glazedlists.swing.DefaultEventListModel
+
+import static ca.odell.glazedlists.swing.GlazedListsSwing.eventListModel
+import static ca.odell.glazedlists.swing.GlazedListsSwing.eventListModelWithThreadProxyList
 
 /**
  * @author Andres Almiray
  */
 class EventListModelFactory extends AbstractModelFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
-            throws InstantiationException, IllegalAccessException {
-        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, EventListModel)) {
+    throws InstantiationException, IllegalAccessException {
+        if (FactoryBuilderSupport.checkValueIsTypeNotString(value, name, DefaultEventListModel)) {
             return value
         }
 
-        if(!attributes.containsKey('source')) {
+        if (!attributes.containsKey('source')) {
             throw new IllegalArgumentException("In $name you must define a value for source: of type ${EventList.class.name}")
         }
         EventList source = attributes.remove('source')
-        new EventListModel(source)
+        boolean wrap = true
+        if (attributes.containsKey('wrap')) wrap = attributes.remove('wrap') as boolean
+        wrap ? eventListModelWithThreadProxyList(source) : eventListModel(source)
     }
 }

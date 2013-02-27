@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 
 package griffon.glazedlists.gui
 
-import griffon.util.GriffonNameUtils
 import ca.odell.glazedlists.gui.AdvancedTableFormat
 import ca.odell.glazedlists.gui.WritableTableFormat
+
+import static griffon.util.GriffonNameUtils.getNaturalName
+import static griffon.util.GriffonNameUtils.getPropertyName
 
 /**
  * @author Andres Almiray
@@ -29,8 +31,8 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
 
     protected static final GET_COLUMN_VALUE_STRATEGY = { target, columns, index ->
         def propertyName = columns[index]
-        if(propertyName) {
-            if(propertyName.size() == 1) propertyName = propertyName.toLowerCase()
+        if (propertyName) {
+            if (propertyName.size() == 1) propertyName = propertyName.toLowerCase()
             else propertyName = propertyName[0].toLowerCase() + propertyName[1..-1]
             return target[propertyName]
         }
@@ -39,12 +41,12 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
 
     protected static final SET_COLUMN_VALUE_STRATEGY = { target, columns, index, editedValue ->
         def propertyName = columns[index]
-        if(propertyName) {
-            if(propertyName.size() == 1) propertyName = propertyName.toLowerCase()
+        if (propertyName) {
+            if (propertyName.size() == 1) propertyName = propertyName.toLowerCase()
             else propertyName = propertyName[0].toLowerCase() + propertyName[1..-1]
             target[propertyName] = editedValue
         }
-		return target
+        return target
     }
 
     protected static final IS_EDITABLE_STRATEGY = { target, columns, index ->
@@ -62,10 +64,10 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
     DefaultWritableTableFormat(List<Map<String, ?>> columns, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY,
                                Closure setColumnValueStrategy = SET_COLUMN_VALUE_STRATEGY,
                                Closure isEditableStrategy = IS_EDITABLE_STRATEGY) {
-        columns.name.collect(this.columnNames) { GriffonNameUtils.getPropertyName(it) }
-        for(int i = 0; i < columnNames.size(); i++) {
+        columns.name.collect(this.columnNames) { getPropertyName(it) }
+        for (int i = 0; i < columnNames.size(); i++) {
             String title = columns[i].title
-            this.columnTitles << (title ?: GriffonNameUtils.getNaturalName(columnNames[i]))
+            this.columnTitles << (title ?: getNaturalName(columnNames[i]))
         }
         def read = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
         def write = setColumnValueStrategy ?: SET_COLUMN_VALUE_STRATEGY
@@ -91,7 +93,7 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
     }
 
     boolean isEditable(baseObject, int index) {
-        if(queries[index] instanceof Closure)
+        if (queries[index] instanceof Closure)
             queries[index](baseObject, columnNames, index)
         else
             queries[index].asBoolean()
@@ -102,16 +104,16 @@ class DefaultWritableTableFormat implements WritableTableFormat, AdvancedTableFo
     }
 
     Class getColumnClass(int index) {
-        if(classes[index] instanceof Closure)
+        if (classes[index] instanceof Closure)
             classes[index](columnNames, index)
         else
             classes[index]
     }
 
     Comparator getColumnComparator(int index) {
-      if(comparators[index] instanceof Closure)
-          comparators[index](columnNames, index)
-      else
-          comparators[index]
+        if (comparators[index] instanceof Closure)
+            comparators[index](columnNames, index)
+        else
+            comparators[index]
     }
 }

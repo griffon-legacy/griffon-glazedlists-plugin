@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@ import ca.odell.glazedlists.swing.EventJXTableModel
  */
 class EventJXTableModelFactory extends AbstractModelFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
-            throws InstantiationException, IllegalAccessException {
-        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, EventJXTableModel)) {
+    throws InstantiationException, IllegalAccessException {
+        if (FactoryBuilderSupport.checkValueIsTypeNotString(value, name, EventJXTableModel)) {
             return value
         }
 
-        if(!attributes.containsKey('source')) {
+        if (!attributes.containsKey('source')) {
             throw new IllegalArgumentException("In $name you must define a value for source: of type ${EventList.class.name}")
         }
-        if(!attributes.containsKey('format')) {
+        if (!attributes.containsKey('format')) {
             throw new IllegalArgumentException("In $name you must define a value for format: of type ${TableFormat.class.name}")
         }
 

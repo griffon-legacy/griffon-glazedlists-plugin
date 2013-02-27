@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,12 @@ import griffon.glazedlists.gui.DefaultWritableTableFormat
  */
 class DefaultWritableTableFormatFactory extends AbstractFactory {
     Object newInstance(FactoryBuilderSupport builder, Object name, Object value, Map attributes)
-            throws InstantiationException, IllegalAccessException {
-        if(FactoryBuilderSupport.checkValueIsTypeNotString(value, name, DefaultWritableTableFormat)) {
+    throws InstantiationException, IllegalAccessException {
+        if (FactoryBuilderSupport.checkValueIsTypeNotString(value, name, DefaultWritableTableFormat)) {
             return value
         }
 
-        if(!attributes.containsKey('columns')) {
+        if (!attributes.containsKey('columns')) {
             throw new IllegalArgumentException("In $name you must define a value for columns:, i.e, [[name: 'ColumnA', class: String]]")
         }
         List columns = attributes.remove('columns')
@@ -36,7 +36,7 @@ class DefaultWritableTableFormatFactory extends AbstractFactory {
         return new DefaultWritableTableFormat(columns,
             attributes.remove('read'),
             attributes.remove('write'),
-            (editable instanceof Closure) ? editable : { -> editable == null ?: editable as Boolean }
+            (editable instanceof Closure) ? editable : {-> editable == null ?: editable as Boolean }
         )
     }
 

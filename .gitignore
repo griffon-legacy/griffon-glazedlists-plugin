@@ -1,4 +1,4 @@
 target
-glazedlists.iml
+*.iml
 .idea
-glazedlists-griffonPluginFixes.iml
+out

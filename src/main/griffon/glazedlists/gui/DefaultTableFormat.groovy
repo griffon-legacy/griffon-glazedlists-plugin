@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package griffon.glazedlists.gui
 
-import griffon.util.GriffonNameUtils
 import ca.odell.glazedlists.gui.TableFormat
+
+import static griffon.util.GriffonNameUtils.getNaturalName
+import static griffon.util.GriffonNameUtils.getPropertyName
 
 /**
  * @author Andres Almiray
@@ -25,8 +27,8 @@ import ca.odell.glazedlists.gui.TableFormat
 class DefaultTableFormat implements TableFormat {
     protected static final GET_COLUMN_VALUE_STRATEGY = { target, columns, index ->
         def propertyName = columns[index]
-        if(propertyName) {
-            if(propertyName.size() == 1) propertyName = propertyName.toLowerCase()
+        if (propertyName) {
+            if (propertyName.size() == 1) propertyName = propertyName.toLowerCase()
             else propertyName = propertyName[0].toLowerCase() + propertyName[1..-1]
             return target[propertyName]
         }
@@ -43,14 +45,14 @@ class DefaultTableFormat implements TableFormat {
     }
 
     DefaultTableFormat(List<String> columnNames, List<String> columnTitles, List<Closure> columnReaders, Closure getColumnValueStrategy = GET_COLUMN_VALUE_STRATEGY) {
-        if(!columnTitles) columnTitles = columnNames
+        if (!columnTitles) columnTitles = columnNames
         assert columnNames.size() == columnTitles.size()
-        columnNames.collect(this.columnNames) { GriffonNameUtils.getPropertyName(it) }
-        for(int i = 0; i < columnNames.size(); i++) {
+        columnNames.collect(this.columnNames) { getPropertyName(it) }
+        for (int i = 0; i < columnNames.size(); i++) {
             String title = columnTitles[i]
-            this.columnTitles << (title != null ? title : GriffonNameUtils.getNaturalName(columnNames[i]))
+            this.columnTitles << (title != null ? title : getNaturalName(columnNames[i]))
         }
-        if(columnReaders) this.columnReaders.addAll(columnReaders)
+        if (columnReaders) this.columnReaders.addAll(columnReaders)
         this.getColumnValueStrategy = getColumnValueStrategy ?: GET_COLUMN_VALUE_STRATEGY
     }
 
@@ -63,9 +65,10 @@ class DefaultTableFormat implements TableFormat {
     }
 
     Object getColumnValue(baseObject, int index) {
-        if(index < columnReaders.size() && columnReaders[index])
-          columnReaders[index](baseObject, columnNames, index)
-        else
-          getColumnValueStrategy(baseObject, columnNames, index)
+        if (index < columnReaders.size() && columnReaders[index]) {
+            columnReaders[index](baseObject, columnNames, index)
+        } else {
+            getColumnValueStrategy(baseObject, columnNames, index)
+        }
     }
 }
